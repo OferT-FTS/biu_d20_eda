@@ -153,10 +153,10 @@ else:
                 if show_overview:
                     st.markdown("#### Dataset Overview")
                     col1, col2 = st.columns([1, 4], vertical_alignment="top")
-                    # col_info = pd.DataFrame({"Data Type": df.dtypes.astype(str)})
+                    col_info = df
                     with col1:
                         st.markdown("###### Columns Data Types: ")
-                        st.dataframe(df.info())
+                        st.dataframe(col_info.info())
                     with col2:
                         st.markdown("###### Data Rows and Columns - 5 records for example: ")
                         st.write(f"*Rows:* {df.shape[0]} | *Columns:* {df.shape[1]}")
