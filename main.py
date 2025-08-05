@@ -113,7 +113,7 @@ else:
             if st.button(":repeat: Replace File"):
                 st.session_state.uploaded_file = None
                 st.session_state.file_uploader_key += 1
-                st.session_state.df = None
+                st.session_state.df = None 
                 st.rerun()
 
             st.markdown("###  EDA Options")
