@@ -156,7 +156,14 @@ else:
                     col_info = pd.DataFrame({"Data Type": df.dtypes.astype(str)})
                     with col1:
                         st.markdown("###### Columns Data Types: ")
-                        st.write(df.info())
+                        buffer = io.StringIO()
+                        df.info(buf=buffer)
+                        info_str = buffer.getvalue()
+
+                        # Display in Streamlit
+                        st.subheader("DataFrame Info")
+                        st.code(info_str, language="text")
+                        st.dataframe(df.info())
                     with col2:
                         st.markdown("###### Data Rows and Columns - 5 records for example: ")
                         st.write(f"*Rows:* {df.shape[0]} | *Columns:* {df.shape[1]}")
