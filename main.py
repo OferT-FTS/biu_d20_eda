@@ -346,33 +346,38 @@ else:
                             st.warning("No numeric columns found for distribution plots.")
 
                 # bar plots
+
                 if show_cat and st.session_state.df is not None:
+                    col1, col2, col3 = st.columns([1, 4, 1])
                     st.markdown("#### Bar Plots of Categorical Features")
 
                     categorical_cols = df.select_dtypes(include=['object', 'category', 'bool']).columns
+                    with col1:
+                        st.empty()
+                    with col2:
+                        if len(categorical_cols) > 0:
+                            selected_cat = st.selectbox("Select a categorical column to visualize:", categorical_cols,
+                                                        key="barplot_cat")
 
-                    if len(categorical_cols) > 0:
-                        selected_cat = st.selectbox("Select a categorical column to visualize:", categorical_cols,
-                                                    key="barplot_cat")
+                            if selected_cat:
+                                cat_counts = df[selected_cat].value_counts().reset_index()
+                                cat_counts.columns = [selected_cat, 'Count']
 
-                        if selected_cat:
-                            cat_counts = df[selected_cat].value_counts().reset_index()
-                            cat_counts.columns = [selected_cat, 'Count']
+                                fig = px.bar(
+                                    cat_counts, x=selected_cat, y='Count', text='Count', title=f"Distribution of {selected_cat}",
+                                    color=selected_cat, color_discrete_sequence=px.colors.qualitative.Set2
+                                )
 
-                            fig = px.bar(
-                                cat_counts, x=selected_cat, y='Count', text='Count', title=f"Distribution of {selected_cat}",
-                                color=selected_cat, color_discrete_sequence=px.colors.qualitative.Set2
-                            )
-
-                            fig.update_traces(textposition='outside')
-                            fig.update_layout(
-                                xaxis_title=selected_cat, yaxis_title="Count", xaxis_tickangle=-45,
-                                font=dict(size=12), title=dict(font=dict(size=16))
-                            )
-                            st.plotly_chart(fig, use_container_width=True)
-                    else:
-                        st.info("No categoricals found for bar plot.")
-
+                                fig.update_traces(textposition='outside')
+                                fig.update_layout(
+                                    xaxis_title=selected_cat, yaxis_title="Count", xaxis_tickangle=-45,
+                                    font=dict(size=12), title=dict(font=dict(size=16))
+                                )
+                                st.plotly_chart(fig, use_container_width=True)
+                        else:
+                            st.info("No categoricals found for bar plot.")
+                    with col3:
+                        st.empty()
 
                 if show_pair and st.session_state.df is not None:
                     st.markdown("#### Seaborn PairPlot")
