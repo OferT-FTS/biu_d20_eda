@@ -162,13 +162,11 @@ else:
                         st.write(f"*Rows:* {df.shape[0]} | *Columns:* {df.shape[1]}")
                         st.dataframe(df.head(5))
                     st.write("")
-                    col1, col2, col3 = st.columns([2, 1, 4], vertical_alignment="top")
+                    col1, col2 = st.columns([4, 3], vertical_alignment="top")
                     with col1:
                         st.markdown("###### Column Statistics Numerical Columns: ")
                         st.write(df.describe())
                     with col2:
-                        st.empty()
-                    with col3:
                         st.markdown("###### Categorial Columns Properties: ")
                         categorical_cols = df.select_dtypes(include=['object', 'category']).columns
                         stats = []
