@@ -37,11 +37,11 @@ First Page - user information
 
 File Upload
  - Invalid file extension:
-   the program displayes an invalid file upload message to load a valid file
+   the program displays an invalid file upload message to load a valid file
  - Valid file extension: 
    1. the program checks for an empty file\zero records file
    2. if the file has records then the interactive relevant plots are displayed
-   3. the sidebar displayes the different plot sections and gives the user the possibilty to display\not display
+   3. the sidebar displays the different plot sections and gives the user the possibility to display\not display
       the different sections
 
   
