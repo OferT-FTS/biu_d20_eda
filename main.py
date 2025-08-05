@@ -300,52 +300,52 @@ else:
                         fig.update_layout(updatemenus=[dict(active=0, buttons=buttons, x=0.5, xanchor="center", y=1.15, yanchor="top")])
                         st.plotly_chart(fig, use_container_width=True)
 
-                # dist plots
-                with col2:
-                    st.markdown("#### Distribution Plot")
+                    # dist plots
+                    with col2:
+                        st.markdown("#### Distribution Plot")
 
-                    numeric_cols = df.select_dtypes(include=['number']).columns
-                    if len(numeric_cols) > 0:
-                        dist_columns = st.multiselect("Select column(s) for distribution plot:", numeric_cols,
-                                                      key="dist_cols_main")
-                        add_kde = st.checkbox("Overlay KDE (Density Curve)", False, key="kde_main")
+                        numeric_cols = df.select_dtypes(include=['number']).columns
+                        if len(numeric_cols) > 0:
+                            dist_columns = st.multiselect("Select column(s) for distribution plot:", numeric_cols,
+                                                          key="dist_cols_main")
+                            add_kde = st.checkbox("Overlay KDE (Density Curve)", False, key="kde_main")
 
-                        if dist_columns:
-                            fig = go.Figure()
-                            colors = px.colors.qualitative.Set2
+                            if dist_columns:
+                                fig = go.Figure()
+                                colors = px.colors.qualitative.Set2
 
-                            for idx, col in enumerate(dist_columns):
-                                # histogram
-                                fig.add_trace(go.Histogram(
-                                    x=df[col], nbinsx=30, name=f"{col} (Hist)", marker_color=colors[idx % len(colors)], opacity=0.6
-                                ))
+                                for idx, col in enumerate(dist_columns):
+                                    # histogram
+                                    fig.add_trace(go.Histogram(
+                                        x=df[col], nbinsx=30, name=f"{col} (Hist)", marker_color=colors[idx % len(colors)], opacity=0.6
+                                    ))
 
-                                # KDE
-                                if add_kde:
-                                    valid_data = df[col].dropna()
-                                    if len(valid_data) > 1 and valid_data.nunique() > 1:
-                                        kde = gaussian_kde(valid_data)
-                                        x_vals = np.linspace(valid_data.min(), valid_data.max(), 200)
-                                        y_vals = kde(x_vals)
-                                        bin_width = np.diff(np.histogram_bin_edges(valid_data, bins=30))[0]
-                                        y_scaled = y_vals * len(valid_data) * bin_width
-                                        fig.add_trace(go.Scatter(
-                                            x=x_vals, y=y_scaled,
-                                            mode='lines', name=f"{col} (KDE)",
-                                            line=dict(color=colors[idx % len(colors)], width=2)
-                                        ))
-                                    else:
-                                        st.warning(
-                                            f"KDE skipped for '{col}' (not enough unique values or all NaN).")
+                                    # KDE
+                                    if add_kde:
+                                        valid_data = df[col].dropna()
+                                        if len(valid_data) > 1 and valid_data.nunique() > 1:
+                                            kde = gaussian_kde(valid_data)
+                                            x_vals = np.linspace(valid_data.min(), valid_data.max(), 200)
+                                            y_vals = kde(x_vals)
+                                            bin_width = np.diff(np.histogram_bin_edges(valid_data, bins=30))[0]
+                                            y_scaled = y_vals * len(valid_data) * bin_width
+                                            fig.add_trace(go.Scatter(
+                                                x=x_vals, y=y_scaled,
+                                                mode='lines', name=f"{col} (KDE)",
+                                                line=dict(color=colors[idx % len(colors)], width=2)
+                                            ))
+                                        else:
+                                            st.warning(
+                                                f"KDE skipped for '{col}' (not enough unique values or all NaN).")
 
-                            fig.update_layout(
-                                xaxis_title="Value", yaxis_title="Count", barmode='overlay', bargap=0.05
-                            )
-                            st.plotly_chart(fig, use_container_width=True)
+                                fig.update_layout(
+                                    xaxis_title="Value", yaxis_title="Count", barmode='overlay', bargap=0.05
+                                )
+                                st.plotly_chart(fig, use_container_width=True)
+                            else:
+                                st.info("Please select at least one numeric column to display the distribution plot.")
                         else:
-                            st.info("Please select at least one numeric column to display the distribution plot.")
-                    else:
-                        st.warning("No numeric columns found for distribution plots.")
+                            st.warning("No numeric columns found for distribution plots.")
 
                 # bar plots
                 if show_cat and st.session_state.df is not None:
@@ -382,9 +382,6 @@ else:
                     numeric_cols = df.select_dtypes(include=['number']).columns
 
                     if len(numeric_cols) >= 2:
-                        import seaborn as sns
-                        import matplotlib.pyplot as plt
-
                         categorical_cols = df.select_dtypes(include=['object', 'category', 'bool']).columns
                         hue_col = None
                         if len(categorical_cols) > 0:
