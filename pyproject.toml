@@ -1,0 +1,14 @@
+[tool.poetry]
+name = "biu-d20-eda"
+version = "0.1.0"
+description = ""
+authors = ["OferT-FTS <ofer@il-fts.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -8,7 +8,17 @@ I've added the file to the GitHub project for the sake of the project.
 
 # Python packages
 For the Project to work, it is necessary to install the following packages:
- Pandas, NumPy, 
+1. pandas 
+2. numPy
+3. streamlit
+4. plotly
+5. seaborn
+6. (requests)
+7. plotly
+8. python-dotenv
+9. scipy
+
+Python interpreter: poetry
 
 # The Program
 The EDA generator is written in Python and the results are displayed in a Streamlit UI.

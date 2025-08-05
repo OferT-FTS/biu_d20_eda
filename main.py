@@ -7,6 +7,7 @@ import plotly.graph_objects as go
 from dotenv import load_dotenv
 import plotly.express as px
 from scipy.stats import gaussian_kde
+import seaborn as sns
 import os
 
 load_dotenv()
@@ -51,6 +52,7 @@ def get_news():
     resp = requests.get(NEWS_URL)
     return resp.json() if resp.status_code == 200 else {}
 
+# read_data csv or excel
 def read_data(ftype, as_bool=True, **kwargs):
     if ftype:
         res = pd.read_csv(st.session_state.uploaded_file, **kwargs)
@@ -113,6 +115,7 @@ else:
                 st.session_state.file_uploader_key += 1
                 st.session_state.df = None
                 st.rerun()
+
             st.markdown("### Bar Chart Emoji: EDA Options")
             show_overview = st.checkbox("Dataset Overview", True)
             show_corr = st.checkbox("Correlation Analysis", True)
@@ -194,8 +197,8 @@ else:
                             })
 
                             if isinstance(df, pd.DataFrame):
-                                missing_counts = df.isnull().sum()
-                                missing_percent = (missing_counts / len(df)) * 100
+                                # missing_counts = df.isnull().sum()
+                                # missing_percent = (missing_counts / len(df)) * 100
 
                                 missing_df = pd.DataFrame({
                                     'Column': missing_counts.index,
@@ -314,11 +317,7 @@ else:
                             for idx, col in enumerate(dist_columns):
                                 # histogram
                                 fig.add_trace(go.Histogram(
-                                    x=df[col],
-                                    nbinsx=30,
-                                    name=f"{col} (Hist)",
-                                    marker_color=colors[idx % len(colors)],
-                                    opacity=0.6
+                                    x=df[col], nbinsx=30, name=f"{col} (Hist)", marker_color=colors[idx % len(colors)], opacity=0.6
                                 ))
 
                                 # KDE
@@ -340,10 +339,7 @@ else:
                                             f"KDE skipped for '{col}' (not enough unique values or all NaN).")
 
                             fig.update_layout(
-                                xaxis_title="Value",
-                                yaxis_title="Count",
-                                barmode='overlay',
-                                bargap=0.05
+                                xaxis_title="Value", yaxis_title="Count", barmode='overlay', bargap=0.05
                             )
                             st.plotly_chart(fig, use_container_width=True)
                         else:
@@ -366,26 +362,18 @@ else:
                             cat_counts.columns = [selected_cat, 'Count']
 
                             fig = px.bar(
-                                cat_counts,
-                                x=selected_cat,
-                                y='Count',
-                                text='Count',
-                                title=f"Distribution of {selected_cat}",
-                                color=selected_cat,
-                                color_discrete_sequence=px.colors.qualitative.Set2
+                                cat_counts, x=selected_cat, y='Count', text='Count', title=f"Distribution of {selected_cat}",
+                                color=selected_cat, color_discrete_sequence=px.colors.qualitative.Set2
                             )
 
                             fig.update_traces(textposition='outside')
                             fig.update_layout(
-                                xaxis_title=selected_cat,
-                                yaxis_title="Count",
-                                xaxis_tickangle=-45,
-                                font=dict(size=12),
-                                title=dict(font=dict(size=16))
+                                xaxis_title=selected_cat, yaxis_title="Count", xaxis_tickangle=-45,
+                                font=dict(size=12), title=dict(font=dict(size=16))
                             )
                             st.plotly_chart(fig, use_container_width=True)
                     else:
-                        st.info("No categorical features found for bar plot visualization.")
+                        st.info("No categoricals found for bar plot.")
 
 
                 if show_pair and st.session_state.df is not None:
@@ -419,6 +407,6 @@ else:
                         st.info("Not enough numeric columns available to generate a scatter matrix.")
 
         except Exception as e:
-            st.error(f":x: Error loading file: {e}")
+            st.error(f" Error loading file: {e}")
             st.session_state.uploaded_file = None
             st.session_state.df=None
