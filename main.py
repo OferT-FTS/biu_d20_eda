@@ -116,7 +116,7 @@ else:
                 st.session_state.df = None
                 st.rerun()
 
-            st.markdown("### Bar Chart Emoji: EDA Options")
+            st.markdown("###  EDA Options")
             show_overview = st.checkbox("Dataset Overview", True)
             show_corr = st.checkbox("Correlation Analysis", True)
             show_dist = st.checkbox("Distribution Plots", True)
