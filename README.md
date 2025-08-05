@@ -18,17 +18,17 @@ The following packages are imported:
  from scipy.stats import gaussian_kde, import os
 
 # Load UI
-in terminal run the following commands: streamlit run main.py
+In terminal run the following commands: streamlit run main.py
 
 # The UI functionality
 First Page - user information
  - In the first page the user is asked for a name and city, only then the user gets to see the upload
    and EDA generator interactive page.
 
-Second Page - interactive EDA generator
- In the second page the user is asked to upload a CSV or EXCEL file, no other file name extension is 
- valid.
- In the sidebar, informative information is displayed: 
+- Second Page - interactive EDA generator
+  In the second page the user is asked to upload a CSV or EXCEL file, no other file name extension is
+  valid.
+  In the sidebar, informative information is displayed: 
   1. Welcome <User>
   2. Current Time
   3. Weather information from OpenWeatherMap (city entered in first page)
