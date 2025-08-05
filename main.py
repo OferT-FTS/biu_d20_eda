@@ -113,15 +113,15 @@ else:
             if st.button(":repeat: Replace File"):
                 st.session_state.uploaded_file = None
                 st.session_state.file_uploader_key += 1
-                st.session_state.df = None 
+                st.session_state.df = None
                 st.rerun()
 
             st.markdown("###  EDA Options")
             show_overview = st.checkbox("Dataset Overview", True)
             show_corr = st.checkbox("Correlation Analysis", True)
             show_dist = st.checkbox("Distribution Plots", True)
-            show_pair = st.checkbox("Pair Plots", True)
             show_cat = st.checkbox("Categorial Data Plots", True)
+            show_pair = st.checkbox("Pair Plots", True)
 
             dist_columns = []
             add_kde = False

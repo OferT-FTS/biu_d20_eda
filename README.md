@@ -16,6 +16,7 @@ For the Project to work, it is necessary to install the following packages:
 6. (requests)
 7. python-dotenv
 8. scipy
+9. openpyxl
 
 Python interpreter: poetry
 
