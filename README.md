@@ -17,7 +17,7 @@ The following packages are imported:
  import plotly.graph_objects as go, from dotenv import load_dotenv, import plotly.express as px, 
  from scipy.stats import gaussian_kde, import os
 
-# load UI
+# Load UI
 in terminal run the following commands: streamlit run main.py
 
 # The UI functionality
