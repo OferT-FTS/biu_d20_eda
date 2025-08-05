@@ -396,7 +396,7 @@ else:
                         # Seaborn pairplot
                         @st.cache_data
                         def generate_pairplot(data, hue):
-                            return sns.pairplot(data, hue=hue, diag_kind="hist", size=6)
+                            return sns.pairplot(data, hue=hue, diag_kind="hist", size=10)
 
                         fig = generate_pairplot(df, hue_col)
                         st.pyplot(fig)
