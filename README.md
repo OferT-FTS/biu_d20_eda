@@ -14,9 +14,8 @@ For the Project to work, it is necessary to install the following packages:
 4. plotly
 5. seaborn
 6. (requests)
-7. plotly
-8. python-dotenv
-9. scipy
+7. python-dotenv
+8. scipy
 
 Python interpreter: poetry
 
