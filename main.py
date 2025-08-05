@@ -379,9 +379,8 @@ else:
                         st.empty()
 
                 if show_pair and st.session_state.df is not None:
-                    col1, col2, col3 = st.columns([1, 4, 1])
                     st.markdown("#### Seaborn PairPlot")
-
+                    col1, col2, col3 = st.columns([1, 4, 1])
                     numeric_cols = df.select_dtypes(include=['number']).columns
                     with col1:
                         st.empty()
