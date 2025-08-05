@@ -152,7 +152,7 @@ else:
                 # data analysis begins here
                 if show_overview:
                     st.markdown("#### Dataset Overview")
-                    col1, col2 = st.columns([2, 3], vertical_alignment="top")
+                    col1, col2 = st.columns([2, 4], vertical_alignment="top")
                     col_info = pd.DataFrame({"Data Type": df.dtypes.astype(str)})
                     with col1:
                         st.markdown("###### Columns Data Types: ")
