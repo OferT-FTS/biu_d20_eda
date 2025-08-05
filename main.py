@@ -348,9 +348,8 @@ else:
                 # bar plots
 
                 if show_cat and st.session_state.df is not None:
-                    col1, col2, col3 = st.columns([1, 4, 1])
                     st.markdown("#### Bar Plots of Categorical Features")
-
+                    col1, col2, col3 = st.columns([1, 4, 1])
                     categorical_cols = df.select_dtypes(include=['object', 'category', 'bool']).columns
                     with col1:
                         st.empty()
