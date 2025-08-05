@@ -29,11 +29,11 @@ Second Page - interactive EDA generator
  In the second page the user is asked to upload a CSV or EXCEL file, no other file name extension is 
  valid.
  In the sidebar, informative information is displayed: 
-  Welcome <User>, 
-  Current Time, 
-  Weather information from OpenWeatherMap (city entered in first page),
-  First three News Headlines from NewsApi,
-  email for comments
+  1. Welcome <User>
+  2. Current Time
+  3. Weather information from OpenWeatherMap (city entered in first page)
+  4. First three News Headlines from NewsApi
+  5. email for comments
 
 File Upload
  Invalid file extension: 
