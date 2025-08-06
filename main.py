@@ -163,8 +163,8 @@ else:
                     # convert column types
                     col1, col2 = st.columns([2, 3])
                     with col1:
-                        st.markdown("###### Select a column to change its type: ")
-                        change_type_col = st.selectbox("", df.columns)
+                        st.markdown("###### Select a column to change its type ")
+                        change_type_col = st.selectbox("Select column for type conversion:", df.columns)
                         new_type = st.selectbox("Change to a new data type:", ["string", "numeric", "datetime"])
                     with col2:
                         st.empty()
