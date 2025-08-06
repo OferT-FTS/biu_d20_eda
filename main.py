@@ -176,7 +176,8 @@ else:
                         elif new_type == "datetime":
                             df[change_type_col] = pd.to_datetime(df[change_type_col], errors="coerce")
 
-                        st.rerun()
+                        # st.rerun()
+                        st.success("Type changed successfully!")
 
 
                     st.write("")
