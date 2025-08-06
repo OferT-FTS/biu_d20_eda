@@ -13,10 +13,7 @@ import os
 load_dotenv()
 
 
-# WEATHER_API_KEY = "8afcbc4fc6c47e4092b6b9fa039c4dce"
-# NEWS_API_KEY = "a15c136c468a4e4d948529956b307527"
-
-# Keys are stored safely in .env file
+# Keys are stored in .env file
 WEATHER_API_KEY = os.getenv("WEATHER_API_KEY")
 NEWS_API_KEY = os.getenv("NEWS_API_KEY")
 
@@ -30,6 +27,7 @@ st.markdown("""
     [data-testid="stSidebar"] {background-color: #e8f0fa;}
     </style>
     """, unsafe_allow_html=True)
+
 pd.set_option('display.float_format', '{:.2f}'.format)
 
 # session state init
@@ -195,9 +193,6 @@ else:
                             })
 
                             if isinstance(df, pd.DataFrame):
-                                # missing_counts = df.isnull().sum()
-                                # missing_percent = (missing_counts / len(df)) * 100
-
                                 missing_df = pd.DataFrame({
                                     'Column': missing_counts.index,
                                     'Missing Count': missing_counts.values,
@@ -214,35 +209,24 @@ else:
                                     if view_option == "Count":
                                         fig = px.bar(
                                             missing_df,
-                                            x='Column',
-                                            y='Missing Count',
-                                            text=missing_df['Missing %'].apply(lambda x: f"{x:.1f}%"),
-                                            title="Missing Values per Column (Count)",
-                                            labels={'Missing Count': 'Missing Values'}
+                                            x='Column', y='Missing Count', text=missing_df['Missing %'].apply(lambda x: f"{x:.1f}%"),
+                                            title="Missing Values per Column (Count)", labels={'Missing Count': 'Missing Values'}
                                         )
                                         fig.update_traces(textposition='outside')
 
                                     else:
                                         missing_df = missing_df.sort_values(by='Missing %', ascending=False)
                                         fig = px.bar(
-                                            missing_df,
-                                            x='Column',
-                                            y='Missing %',
-                                            text=missing_df['Missing %'].apply(lambda x: f"{x:.1f}%"),
-                                            title="Missing Values per Column (Percentage)",
-                                            labels={'Missing %': 'Missing Values (%)'}
+                                            missing_df, x='Column', y='Missing %', text=missing_df['Missing %'].apply(lambda x: f"{x:.1f}%"),
+                                            title="Missing Values per Column (Percentage)", labels={'Missing %': 'Missing Values (%)'}
                                         )
                                         fig.update_traces(textposition='outside')
 
                                     #Adjust font sizes
                                     fig.update_layout(
-                                        xaxis_tickangle=-45,
-                                        font=dict(size=12),
-                                        title=dict(font=dict(size=16)),
-                                        xaxis=dict(title_font=dict(size=14), tickfont=dict(size=12)),
+                                        xaxis_tickangle=-45, font=dict(size=12), title=dict(font=dict(size=16)), xaxis=dict(title_font=dict(size=14), tickfont=dict(size=12)),
                                         yaxis=dict(title_font=dict(size=14), tickfont=dict(size=12))
                                     )
-
                                     st.plotly_chart(fig)
                                 with col2:
                                     st.empty()
@@ -268,8 +252,7 @@ else:
                             aspect="auto", title="Correlation Heatmap"
                         )
                         fig.update_layout(
-                            width=600,
-                            height=500,
+                            width=600, height=500,
                             title={
                                 'text': "Correlation Heatmap",
                                 'font': {'size': 18},
@@ -282,8 +265,8 @@ else:
                 col1, col2 = st.columns([2, 3])
                 if show_dist:
                     with col1:
-                        st.markdown("#### Boxplot Numerical Columns")
                         numeric_cols = df.select_dtypes(include=['number']).columns
+                        st.markdown("#### Boxplot Numerical Columns")
                         fig = go.Figure()
                         for col in numeric_cols:
                             fig.add_trace(go.Box(y=df[col], name=col, visible=True, boxmean=True))
@@ -302,7 +285,7 @@ else:
                     with col2:
                         st.markdown("#### Distribution Plot")
 
-                        numeric_cols = df.select_dtypes(include=['number']).columns
+                        # numeric_cols = df.select_dtypes(include=['number']).columns
                         if len(numeric_cols) > 0:
                             dist_columns = st.multiselect("Select column(s) for distribution plot:", numeric_cols,
                                                           key="dist_cols_main")
