@@ -1,5 +1,5 @@
 import streamlit as st
-import time
+import datetime
 import pandas as pd
 import requests
 import numpy as np
@@ -83,7 +83,12 @@ else:
     # sidebar before file upload
     with st.sidebar:
         st.write(f"Welcome *{st.session_state.name}!*")
-        st.write(f":timer_clock: Current Time: {time.strftime('%H:%M')}")
+        # st.write(f":timer_clock: Current Time: {time.strftime('%H:%M')}")
+        w = st.session_state.jobject
+        tz_offset = w.get("timezone", 0)
+        utc_time = datetime.datetime.utcnow()  # Current UTC time
+        city_time = utc_time + datetime.timedelta(seconds=tz_offset)
+        st.write(f":timer_clock: Current Time in {st.session_state.city}: **{city_time.strftime('%H:%M')}**")
         if st.session_state.uploaded_file is None:
             st.info("Please upload a CSV or Excel file to start.")
             live_placeholder = st.empty()

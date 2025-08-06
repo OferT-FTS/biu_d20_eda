@@ -25,7 +25,7 @@ The EDA generator is written in Python and the results are displayed in a Stream
 The following packages are imported:
  import streamlit as st, import time, import pandas as pd, import requests, import numpy as np, 
  import plotly.graph_objects as go, from dotenv import load_dotenv, import plotly.express as px, 
- from scipy.stats import gaussian_kde, import os
+ from scipy.stats import gaussian_kde, import os, import datetime
 
 # Load UI
 In terminal run the following commands: streamlit run main.py
