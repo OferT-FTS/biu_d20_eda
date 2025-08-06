@@ -86,7 +86,7 @@ else:
         # st.write(f":timer_clock: Current Time: {time.strftime('%H:%M')}")
         w = st.session_state.jobject
         tz_offset = w.get("timezone", 0)
-        utc_time = datetime.datetime.utcnow()  # Current UTC time
+        utc_time = datetime.datetime.now(datetime.UTC)
         city_time = utc_time + datetime.timedelta(seconds=tz_offset)
         st.write(f":timer_clock: Current Time in {st.session_state.city}: **{city_time.strftime('%H:%M')}**")
         if st.session_state.uploaded_file is None:
