@@ -161,10 +161,13 @@ else:
                         st.dataframe(df.head(5))
 
                     # convert column types
-                    st.markdown("###### Select a column to change its type: ")
-                    change_type_col = st.selectbox("", df.columns)
-                    new_type = st.selectbox("Change to a new data type:", ["string", "numeric", "datetime"])
-
+                    col1, col2 = st.columns([2, 3])
+                    with col1:
+                        st.markdown("###### Select a column to change its type: ")
+                        change_type_col = st.selectbox("", df.columns)
+                        new_type = st.selectbox("Change to a new data type:", ["string", "numeric", "datetime"])
+                    with col2:
+                        st.empty()
                     if st.button("Change Type"):
                         if new_type == "string":
                             df[change_type_col] = df[change_type_col].astype(str)
@@ -174,6 +177,7 @@ else:
                             df[change_type_col] = pd.to_datetime(df[change_type_col], errors="coerce")
 
                         st.rerun()
+
 
                     st.write("")
                     col1, col2 = st.columns([4, 3], vertical_alignment="top")
