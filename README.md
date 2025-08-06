@@ -53,6 +53,6 @@ File Upload
    2. if the file has records then the interactive relevant plots are displayed
    3. the sidebar displays the different plot sections and gives the user the possibility to display\not display
       the different sections
-   4. the user can change column types
+   4. the user can change column types, when changed column type the st.rerun() is activated
 
   
