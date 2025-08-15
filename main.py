@@ -231,7 +231,7 @@ else:
                                 })
 
                                 missing_df = missing_df[missing_df['Missing Count'] > 0]
-                                st.write(missing_df.empty)
+
                                 if(missing_df.empty):
                                     st.write("No missing values detected in the dataset!")
 
