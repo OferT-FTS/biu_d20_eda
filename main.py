@@ -124,7 +124,7 @@ else:
             show_corr = st.checkbox("Correlation Analysis", True)
             show_dist = st.checkbox("Distribution Plots", True)
             show_cat = st.checkbox("Categorial Data Plots", True)
-            show_pair = st.checkbox("Pair Plots", True)
+            # show_pair = st.checkbox("Pair Plots", True)
 
             dist_columns = []
             add_kde = False
@@ -396,36 +396,36 @@ else:
                     with col3:
                         st.empty()
 
-                if show_pair and st.session_state.df is not None:
-                    st.markdown("#### Seaborn PairPlot")
-                    col1, col2, col3 = st.columns([1, 4, 1])
-                    numeric_cols = df.select_dtypes(include=['number']).columns
-                    with col1:
-                        st.empty()
-                    with col2:
-                        if len(numeric_cols) >= 2:
-                            categorical_cols = df.select_dtypes(include=['object', 'category', 'bool']).columns
-                            hue_col = None
-                            if len(categorical_cols) > 0:
-                                hue_col = st.selectbox("Color by (Hue):", ["None"] + list(categorical_cols),
-                                                       key="hue_main")
-                                if hue_col == "None":
-                                    hue_col = None
-
-                            sns.set_context("paper", font_scale=1.8)
-                            sns.set_style("whitegrid")
-
-                            # Seaborn pairplot
-                            @st.cache_data
-                            def generate_pairplot(data, hue):
-                                return sns.pairplot(data, hue=hue, diag_kind="hist", height=3)
-
-                            fig = generate_pairplot(df, hue_col)
-                            st.pyplot(fig)
-                        else:
-                            st.info("Not enough numeric columns available to generate a scatter matrix.")
-                    with col3:
-                        st.empty()
+                # if show_pair and st.session_state.df is not None:
+                #     st.markdown("#### Seaborn PairPlot")
+                #     col1, col2, col3 = st.columns([1, 4, 1])
+                #     numeric_cols = df.select_dtypes(include=['number']).columns
+                #     with col1:
+                #         st.empty()
+                #     with col2:
+                #         if len(numeric_cols) >= 2:
+                #             categorical_cols = df.select_dtypes(include=['object', 'category', 'bool']).columns
+                #             hue_col = None
+                #             if len(categorical_cols) > 0:
+                #                 hue_col = st.selectbox("Color by (Hue):", ["None"] + list(categorical_cols),
+                #                                        key="hue_main")
+                #                 if hue_col == "None":
+                #                     hue_col = None
+                #
+                #             sns.set_context("paper", font_scale=1.8)
+                #             sns.set_style("whitegrid")
+                #
+                #             # Seaborn pairplot
+                #             @st.cache_data
+                #             def generate_pairplot(data, hue):
+                #                 return sns.pairplot(data, hue=hue, diag_kind="hist", height=3)
+                #
+                #             fig = generate_pairplot(df, hue_col)
+                #             st.pyplot(fig)
+                #         else:
+                #             st.info("Not enough numeric columns available to generate a scatter matrix.")
+                #     with col3:
+                #         st.empty()
 
         except Exception as e:
             st.error(f" Error loading file: {e}")
