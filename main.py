@@ -232,6 +232,7 @@ else:
 
                                 missing_df = missing_df[missing_df['Missing Count'] > 0]
                                 st.write(missing_df)
+                                st.write(missing_df.empty)
                                 if not missing_df.empty:
                                     missing_df = missing_df.sort_values(by='Missing Count', ascending=False)
 
