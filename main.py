@@ -190,8 +190,6 @@ else:
 
                         st.rerun()
 
-
-
                     st.write("")
                     col1, col2 = st.columns([4, 3], vertical_alignment="top")
                     with col1:
@@ -266,11 +264,15 @@ else:
                                 with col3:
                                     st.write("###### Missing Values Table")
                                     st.dataframe(missing_df.reset_index(drop=True))
-
+                                    if st.button("Push Button To Delete All Missing Values Records...", key="delete_missing"):
+                                        st.write("✅ Missing Values Records Deleted!")
+                                        df = df.dropna()
+                                        st.rerun()
                             else:
                                 st.success("No missing values detected in the dataset!")
                     else:
                         st.error("data object must be a Pandas DataFrame!")
+
                 # correlation plots
                 if show_corr:
                     st.markdown("##### Correlation Analysis")
