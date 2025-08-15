@@ -166,17 +166,17 @@ else:
                         st.dataframe(df.head(5))
 
                     # convert column types
-                    col1, col2, col3 = st.columns([1,2, 3])
+                    col1, col2, col3 = st.columns([1,3, 2])
                     with col1:
                         n_unique = df.nunique()
                         n_unique.name = 'unique_values'
                         st.write(n_unique)
                     with col2:
-                        st.empty()
-                    with col3:
                         st.markdown("###### Select a column to change its type ")
                         change_type_col = st.selectbox("Select column for type conversion:", df.columns)
                         new_type = st.selectbox("Change to a new data type:", ["string", "numeric", "datetime"])
+                    with col3:
+                        st.empty()
 
                     if st.button("Change Type"):
                         if new_type == "string":
