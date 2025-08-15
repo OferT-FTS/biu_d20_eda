@@ -267,10 +267,11 @@ else:
                                 with col3:
                                     st.write("###### Missing Values Table")
                                     st.dataframe(missing_df.reset_index(drop=True))
-                                if st.button("Push Button To Delete All Missing Values Records...", key="delete_missing"):
-                                    st.write(" Missing Values Records Deleted!")
-                                    st.session_state.df = st.session_state.df.dropna()
-                                    st.rerun()
+                                if missing_df.empty:
+                                    if st.button("Push Button To Delete All Missing Values Records...", key="delete_missing"):
+                                        st.write(" Missing Values Records Deleted!")
+                                        st.session_state.df = st.session_state.df.dropna()
+                                        st.rerun()
                             else:
                                 st.success("No missing values detected in the dataset!")
                     else:
